@@ -1,7 +1,7 @@
 #!/bin/bash
 #Xtec Minecraft original server installer
 #Design:+Clouds+_and_a_lot_of_classmate  Program:+Clouds+
-#Version 4.0_beta2
+#Version 4.0_beta3
 
 instmc(){
 	clear
@@ -19,23 +19,20 @@ instmc(){
 	chmod a+x runmc.sh
 	echo "eula=true" > eula.txt
 	clear
-	echo 'The 1st step setup success.Please use command "bash runmc.sh" to run Minecraft server.'
-	echo "If your Minecraft server started successfully, exit, then re-run this program and select 4."
+	echo "Minecraft server setup success!"
+	echo "Run it in a backward process, connect and play!"
+	echo "To enable cheat, please set your account to the op menually from your server."
+	echo 'If you are not a genuine user, please use "bash runmc.sh" to run server the first time, exit it, re-run this program and select 4.'
+	echo "Thanks for using this program!"
 	exit
 }
-
 mcconfig(){
 	clear
 	cd ~
 	sed -i 's/online-mode=true/online-mode=false/g' server.properties
 	clear
-	echo "Minecraft server setup success!"
-	echo "Run it in a backward process, connect and play!"
-	echo "But if you want to have some cheat, please set your account to the op menually from your server."
-	echo "Thanks for using this program!"
 	exit
 }
-
 instjava(){
 	if [[ -f /etc/redhat-release ]]; then
 	 yum update -y
@@ -73,7 +70,6 @@ instjava(){
 	echo "Java installed successfully!"
 	mainmenu
 }
-
 instscr(){
 	if [[ -f /etc/redhat-release ]]; then
 	 yum install screen -y
@@ -96,7 +92,6 @@ instscr(){
 	echo 'If you don't know how to use this, run "screen --help" or explore Xtec to get help.'
 	mainmenu
 }
-
 mainmenu(){
 	clear
 	echo "-----Minecraft Original server installer by +Clouds+-----"
@@ -107,13 +102,11 @@ mainmenu(){
 	echo "1.Install Java (If you do not have it)"
 	echo "2.Install Screen (Required because MC Server need to be a backward process)"
 	echo "3.Install Minecraft server (The 1st step of setup Minecraft server)"
-	echo "4.Setup config file (The 2nd step of setup Minecraft server)"
-
+	echo "4.Allow Offline user (Optional)"
+	echo " "
 	echo "---------------------------------------------------------"
-	
 	read menu
 	case $menu in
-
 		1)
 			instjava;;
 		2)
@@ -121,8 +114,7 @@ mainmenu(){
 		3)
 			instmc;;
 		4)
-			mcconfig;;
+			mcconfig
 	esac
 }
-
 mainmenu
