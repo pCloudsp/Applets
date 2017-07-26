@@ -1,7 +1,7 @@
 #!/bin/bash
 #Xtec Minecraft original server installer
 #Design:+Clouds+_and_a_lot_of_classmate  Program:+Clouds+
-#Version 4.0
+#Version 4.0_beta2
 
 instmc(){
 	clear
@@ -15,17 +15,12 @@ instmc(){
 	echo "Please enter the MAX memory size you want for your Minecraft server."
 	echo "Example:512M"
 	read maxram
-	echo "java -Xmx$maxram -Xms32M -jar ~/minecraft_server.$version.jar nogui" > runmc.sh
+	echo "java -Xmx$maxram -Xms32M -jar ~/minecraft_server.$version.jar nogui" > runmc.shserv
 	chmod a+x runmc.sh
 	echo "eula=true" > eula.txt
 	clear
-	echo "Please enter the name you want for the op."
-	read op
-	echo $op > ops.txt
-	clear
-	echo "The 1st step setup success.Please Run Minecraft server with this following connamd:"
-	echo "bash runmc.sh"
-	echo "If your Minecraft server started successfully, re-run this program and select 2."
+	echo 'The 1st step setup success.Please use command "bash runmc.sh" to run Minecraft server.'
+	echo "If your Minecraft server started successfully, exit, then re-run this program and select 4."
 	exit
 }
 
@@ -36,6 +31,7 @@ mcconfig(){
 	clear
 	echo "Minecraft server setup success!"
 	echo "Run it in a backward process, connect and play!"
+	echo "But if you want to have some cheat, please set your account to the op menually from your server."
 	echo "Thanks for using this program!"
 	exit
 }
@@ -75,27 +71,10 @@ instjava(){
 	sleep 1
 	clear
 	echo "Java installed successfully!"
-	echo "If you need install Minecraft server for the next step, select 1."
 	mainmenu
 }
 
 instscr(){
-	if [[ -f /etc/redhat-release ]]; then
-	 yum update -y
-	elif cat /etc/issue | grep -q -E -i "debian"; then
-	 apt-get update -y
-	elif cat /etc/issue | grep -q -E -i "ubuntu"; then
-	 apt-get update -y
-	elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
-	 yum update -y
-	elif cat /proc/version | grep -q -E -i "debian"; then
-	 apt-get update -y
-	elif cat /proc/version | grep -q -E -i "ubuntu"; then
-	 apt-get update -y
-	elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
-	 yum update -y
-	fi
-
 	if [[ -f /etc/redhat-release ]]; then
 	 yum install screen -y
 	elif cat /etc/issue | grep -q -E -i "debian"; then
@@ -114,35 +93,35 @@ instscr(){
 	sleep 1
 	clear
 	echo "Screen installed successfully!"
-	echo 'For screen help, type "screen --help".'
-	exit
+	echo 'If you don't know how to use this, run "screen --help" or explore Xtec to get help.'
+	mainmenu
 }
 
 mainmenu(){
 	clear
 	echo "-----Minecraft Original server installer by +Clouds+-----"
 	echo "-------------Version 4.0_dev1  Code:+Clouds+-------------"
-	echo " "
 	echo "Please choose a function to run it."
-	echo "If you have a fully-empty server, please run function in the following order:"
-	echo "3-1-2-4"
+	echo "If you have a fully-empty server, just run functions like 1-2-3-4."
 	echo " "
-	echo "1.Install Minecraft server (The 1st step of setup Minecraft server)"
-	echo "2.Setup config file (The 2nd step of setup Minecraft server)"
-	echo "3.Install Java (If you do not have it)"
-	echo "4.Install Screen (Required)"
+	echo "1.Install Java (If you do not have it)"
+	echo "2.Install Screen (Required because MC Server need to be a backward process)"
+	echo "3.Install Minecraft server (The 1st step of setup Minecraft server)"
+	echo "4.Setup config file (The 2nd step of setup Minecraft server)"
+
 	echo "---------------------------------------------------------"
 	
 	read menu
 	case $menu in
+
 		1)
-			instmc;;
-		2)
-			mcconfig;;
-		3)
 			instjava;;
+		2)
+			instscr;;
+		3)
+			instmc;;
 		4)
-			instscr
+			mcconfig;;
 	esac
 }
 
