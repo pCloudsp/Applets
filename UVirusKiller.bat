@@ -16,8 +16,8 @@ set /p vol=
 
 cls
 color 2c
-echo 最后请备份好U盘上所有EXE文件,继续执行操作会删除U盘根目录上所有EXE文件!
-echo 确认U盘上无EXE文件后请按任意键继续;
+echo 最后请备份好U盘上所有EXE和VBS文件,继续执行操作会删除U盘根目录上所有EXE和VBS文件!
+echo 确认U盘上无上述文件后请按任意键继续;
 pause>nul
 color 2f
 cls
@@ -25,6 +25,7 @@ echo 请稍等,正在以标准方案清除该U盘内的假文件夹病毒和autorun病毒...
 
 del %vol%\*.exe /F /Q
 del %vol%\autorun.inf /F /Q
+del %vol%\*.vbs /F /Q
 attrib %vol%\* /D /S -S -H
 
 if exist %vol%\autorun.inf (
@@ -36,8 +37,9 @@ if exist %vol%\autorun.inf (
 	pause
 	cls
 	
-	echo autorun.inf >> C:\Exclusion.txt
+	echo autorun.inf > C:\Exclusion.txt
 	echo .exe >> C:\Exclusion.txt
+	echo .vbs >> C:\Exclusion.txt
 	xcopy "%vol%\*" "C:\udsktmp" /E /I /Y /EXCLUDE:C:\Exclusion.txt
 	format %vol% /Q /Y
 	xcopy "C:\udsktmp\*" "%vol%" /E /I /Y
