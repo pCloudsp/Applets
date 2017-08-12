@@ -2,10 +2,10 @@
 color 2f
 cls
 
-echo ----------Xtec U盘病毒清除工具 v1.1----------
+echo ----------Xtec U盘病毒清除工具 v1.2----------
 echo 推荐在PE环境下运行本工具以在短时间内清除autorun病毒
 echo 如果是正常系统,请确保该系统没有染上U盘内的病毒
-echo 并正以管理员身份运行此脚本！
+echo 并正以管理员身份运行此脚本!
 echo 请按任意键继续，否则直接关闭窗口吧!
 pause>nul
 cls
@@ -17,7 +17,8 @@ set /p vol=
 cls
 color 2c
 echo 最后请备份好U盘上所有EXE和VBS文件,继续执行操作会删除U盘根目录上所有EXE和VBS文件!
-echo 确认U盘上无上述文件后请按任意键继续;
+echo 请再次确认该脚本正以管理员身份运行,否则可能丢失U盘内所有数据!
+echo 确认U盘上无上述文件,并正以管理员身份运行脚本后请按任意键继续;
 pause>nul
 color 2f
 cls
@@ -43,6 +44,8 @@ if exist %vol%\autorun.inf (
 	xcopy "%vol%\*" "C:\udsktmp" /E /I /Y /EXCLUDE:C:\Exclusion.txt
 	format %vol% /Q /Y
 	xcopy "C:\udsktmp\*" "%vol%" /E /I /Y
+	del C:\udsktmp /Q
+	del C:\Exclusion.txt /Q
 	
 	cls
 	echo 恭喜你,备用方案清除病毒成功!
