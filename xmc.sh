@@ -1,7 +1,7 @@
 #!/bin/bash
 #Xtec Minecraft original server installer
 #Design:+Clouds+_and_a_lot_of_classmate  Program:+Clouds+
-#Version 4.0_beta3
+#Version 4.0_finished
 
 instmc(){
 	clear
